@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.joblist {
+  display: flex;
+  margin: auto;
+  padding: 5%;
+}
+.jobitem {
+  margin: 1%;
+}
