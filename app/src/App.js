@@ -11,7 +11,7 @@ const App = () => {
       <h1>Build your resume:</h1>
       <JobForm />
       <JobList />
-      <JobCard />
+      
     </div>
   );
 };

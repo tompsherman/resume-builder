@@ -1,11 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import PowerStates from './PowerStates'
+import JobCard from './JobCard'
 
 const JobList = () => {
     const [resume, setResume] = useState([])
+    const [doggle, setDoggle] = useState(false)
+
+    const seeInfo = () => {
+        setDoggle(!doggle)
+    }
 
     useEffect(()=>{
-        axios.get('http://localhost:8888/api/resume')
+        axios.get('http://localhost:8888/api/resume/jobs')
         .then(response => setResume(response.data))
         .catch(error => console.log(error))
     }, [])
@@ -16,12 +23,13 @@ const JobList = () => {
             <h4>list of past jobs:</h4>
             {
                 resume.map(job => 
-                    <div className="joblist">
-                        <h5 className="jobitem">{job.job_title}</h5>
-                        <h5 className="jobitem">{job.employer}</h5>
-                    </div>
+                    <>
+                        <h2 onClick={seeInfo}>{job.job_title}</h2>
+                        {doggle ? <JobCard job={job} key={job.id} doggle={doggle}/> : null}
+                    </>
                 )
             }
+            <PowerStates />
         </div>
     )
 }

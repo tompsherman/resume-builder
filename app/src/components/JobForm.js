@@ -3,13 +3,11 @@ import axios from 'axios'
 import ActionStatementForm from './ActionStatementForm'
 
 const initialValues = {
-    title: "",
+    job_title: "",
     employer: "",
     start_date: "",
     end_date: "",
-    power_state: [{}],
     img_url: "",
-    skills: ""
 }
 
 const url = "this is a url"
@@ -26,8 +24,8 @@ const JobForm = () => {
         console.log(job)
         event.preventDefault()
         axios
-            .post(url, job)
-            .then(response => console.log("this is the power statement:", response))
+            .post("http://localhost:8888/api/resume/jobs", job)
+            .then(response => console.log("this is the job:", response))
             .catch(error => console.log(error))
         setJob(initialValues)
     }
@@ -37,9 +35,9 @@ const JobForm = () => {
             <h4>Enter Jobs here:</h4>
             <form onSubmit={submitHandler}>
                 job title: <input
-                    name='title'
+                    name='job_title'
                     type='text'
-                    value={job.title}
+                    value={job.job_title}
                     onChange={changeHandler}
                     placeholder='enter title verb (required)'
                 />
@@ -76,17 +74,8 @@ const JobForm = () => {
                     placeholder='employer image'
                 />
                 <br></br>
-                skills: <input
-                    name='skills'
-                    type='text'
-                    value={job.skills}
-                    onChange={changeHandler}
-                    placeholder='skills - this should be a multi-click option'
-                />
-                <br></br>
                 <button>submit</button>
             </form>
-            <ActionStatementForm />
         </div>
     )
 }

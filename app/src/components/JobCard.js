@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ActionStatementForm from './ActionStatementForm'
 
-const JobCard = () => {
+const JobCard = (props) => {
+    const [snoggle, setSnoggle] = useState(false)
+    const { job } = props
+    console.log("job card props", job)
+
+    const showAct = () => {
+        setSnoggle(!snoggle)
+    }
+
     return (
         <div>
-            <h5>individual job infos:</h5>
+            <h3>{job.employer}</h3>
+            <button>edit job info</button>
+            {snoggle ? <ActionStatementForm /> : null}
+            <button onClick={showAct}>add power statement</button>
+            <button>delete</button>
         </div>
     )
 }
