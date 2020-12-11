@@ -15,6 +15,11 @@ const url = "this is a url"
 const JobForm = () => {
 
     const [job, setJob] = useState(initialValues)
+    const [floggle, setFloggle] = useState(false)
+
+    const showForm = () => {
+        setFloggle(!floggle)
+    }
 
     const changeHandler = (event) => {
         setJob({...job, [event.target.name]: event.target.value})
@@ -32,8 +37,9 @@ const JobForm = () => {
 
     return (
         <div>
-            <h4>Enter Jobs here:</h4>
-            <form onSubmit={submitHandler}>
+            <h4 onClick={showForm}>Enter Jobs here:</h4>
+            {floggle ? 
+            (<form onSubmit={submitHandler}>
                 job title: <input
                     name='job_title'
                     type='text'
@@ -75,7 +81,7 @@ const JobForm = () => {
                 />
                 <br></br>
                 <button>submit</button>
-            </form>
+            </form>) : null}
         </div>
     )
 }

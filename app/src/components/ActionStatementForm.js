@@ -20,7 +20,7 @@ const ActionStatementForm = () => {
         console.log(powerState)
         event.preventDefault()
         axios
-            .post(url, powerState)
+            .post("http://localhost:8888/api/resume/power", powerState)
             .then(response => console.log("this is the power statement:", response))
             .catch(error => console.log(error))
         setPowerState(initialValues)
