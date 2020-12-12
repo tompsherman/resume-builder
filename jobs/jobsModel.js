@@ -7,8 +7,8 @@ module.exports = {
     createJobs,
     updateJobs,
     removeJobs,
-    findPowers
-
+    findPowers,
+    createPower
 }
 
     //functions:
@@ -33,6 +33,14 @@ module.exports = {
             .where({id})
             .first()
     }
+
+    async function createPower(powerstate, job_id){
+        const res = await db('powerstate').insert(powerstate, job_id)
+            return db('powerstate')
+            .where({job_id})
+            .first()
+    }
+
     async function updateJobs(changes, id){
         const count = await db('jobs').where({id}).update(changes)
         if (count){ 
