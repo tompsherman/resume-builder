@@ -31,14 +31,14 @@ router.get('/', (req,res)=>{
 }) 
 
 router.post('/:id/power', (req,res)=>{ 
-    const powerData = req.body
+    const powerData = {...req.body, job_id: req.params.id}
     const {id} = req.params
-    const {job_id} = req.params
-    console.log(req.params)
+
     Job.findJobsById(id)
     .then(job => {
       if(job){
-        Job.createPower(powerData, job_id).then(job => { 
+        console.log(powerData)
+        Job.createPower(powerData).then(job => { 
           console.log("router", job)
           res.status(201).json(job)
       })

@@ -38,7 +38,7 @@ module.exports = {
         const res = await db('powerstate').insert(powerstate, job_id)
             return db('powerstate')
             .where({job_id})
-            .first()
+            .orderBy('id')
     }
 
     async function updateJobs(changes, id){
