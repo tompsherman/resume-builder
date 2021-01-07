@@ -14,28 +14,52 @@ const JobCard = (props) => {
         .catch(error => console.log(error))
     }, [])
 
-    console.log("current power state:", powerState)
+    // console.log("current power state:", powerState[0].quant)
+
+    const theOrderVar = () => {
+        let arr = []
+        for(let i=0; i<powerState.length; i++){
+        let powerOrder = ``
+        let ordering = powerState[i].quant.split(" ")
+        // console.log("ordering", ordering)
+        if (ordering[ordering.length-1] === "of"){
+            powerOrder = `${powerState[i].action} ${powerState[i].quant} ${powerState[i].result}`
+        } else {
+            powerOrder = `${powerState[i].action} ${powerState[i].result} ${powerState[i].quant}`
+        }
+        console.log("power ordering", powerOrder)
+        arr.push(powerOrder)
+        }
+        return arr.map(statement => <div>{statement}</div>)
+    }
+
 
     const showAct = () => {
         setSnoggle(!snoggle)
     }
 
+    
     return (
         <div>
             <h3>{job.employer}</h3>
             
-            {
+            <h4>{theOrderVar()}</h4>
+
+            {/* {
                 powerState.map(power =>
+                    
                     <>
                     <h4>{power.action} {power.result} {power.quant}</h4>
                     </>
+                    
+                    
                 )
-            }
+            } */}
 
-            {/* <button>edit job info</button>
+            <button>edit job info</button>
             {snoggle ? <ActionStatementForm /> : null}
             <button onClick={showAct}>add power statement</button>
-            <button>delete</button> */}
+            <button>delete</button>
         </div>
     )
 }
