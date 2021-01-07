@@ -15,9 +15,9 @@ module.exports = {
     function findJobs(){
         return db('jobs')
     }
-    function findJobsById(id){
+    function findJobsById(job_id){
         return db('jobs')
-        .where({id})
+        .where({job_id})
         .first()
     }
     function findPowers(id){
@@ -29,10 +29,10 @@ module.exports = {
     }
 
     async function createJobs(job){
-        const [id] = await
+        const [job_id] = await
         db('jobs').insert(job)
             return db('jobs')
-            .where({id})
+            .where({job_id})
             .first()
     }
 
@@ -43,11 +43,11 @@ module.exports = {
             .orderBy('id')
     }
 
-    async function updateJobs(changes, id){
-        const count = await db('jobs').where({id}).update(changes)
+    async function updateJobs(changes, job_id){
+        const count = await db('jobs').where({job_id}).update(changes)
         if (count){ 
             return db('jobs')
-            .where({id})
+            .where({job_id})
             .first()
         } else {
             return Promise.resolve(null)
