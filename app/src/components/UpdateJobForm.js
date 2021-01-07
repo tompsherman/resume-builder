@@ -10,10 +10,9 @@ const initialValues = {
     img_url: ""
 }
 
-const UpdateJobForm = (props) => {
-    const {job} = props
-    console.log("job update props", job.job_id)
-    const {id} = job.job_id
+const UpdateJobForm = () => {
+    const {id} = useParams()
+    console.log("job update props", id)
     const [jobby, setJobby] = useState(initialValues)
     
     useEffect(()=>{

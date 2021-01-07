@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import ActionStatementForm from './ActionStatementForm'
 import UpdateJobForm from './UpdateJobForm'
+import { useHistory } from 'react-router-dom'
 
 const JobCard = (props) => {
     const [snoggle, setSnoggle] = useState(false)
     const [powerState, setPowerState] = useState([])
     const { job } = props
+    const history = useHistory()
     console.log("job card props", job)
 
     useEffect(()=>{
@@ -39,28 +41,22 @@ const JobCard = (props) => {
         setSnoggle(!snoggle)
     }
 
-    
+    const ohCrud = (event) => {
+        history.push(`/edit-job/${job.job_id}`)
+    }
+
     return (
         <div>
             <h3>{job.employer}</h3>
             
             <h4>{theOrderVar()}</h4>
 
-            {/* {
-                powerState.map(power =>
-                    
-                    <>
-                    <h4>{power.action} {power.result} {power.quant}</h4>
-                    </>
-                    
-                    
-                )
-            } */}
+
             { snoggle ? <UpdateJobForm job={job}/> : null }
             <button onClick={showEdit}>edit job info</button>
             {/* {snoggle ? <ActionStatementForm /> : null} */}
             <button>add power statement</button>
-            <button>delete</button>
+            <button onClick={ohCrud}>make changes</button>
         </div>
     )
 }

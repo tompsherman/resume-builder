@@ -5,6 +5,7 @@ import './App.css'
 import JobCard from './components/JobCard'
 import JobForm from './components/JobForm'
 import JobList from './components/JobList'
+import UpdateJobForm from './components/UpdateJobForm'
 
 const App = () => {
   return (
@@ -16,6 +17,10 @@ const App = () => {
       <Route exact path='/add'>
           <JobForm />
       </Route>
+      <Route exact path='/edit-job/:id'>
+          <UpdateJobForm />
+      </Route>
+
     </div>
   );
 };
