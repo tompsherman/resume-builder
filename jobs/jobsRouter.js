@@ -10,12 +10,16 @@ router.get('/test', (req, res) => {
     res.status(202).json({message: 'the server is running at ' + currentTime})
 })
 
+// @desc		get all jobs
+// @route		GET /
 router.get('/', (req,res)=>{ 
     Job.findJobs()
     .then(jobs => res.status(200).json(jobs))
     .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
  })
 
+// @desc		get job
+// @route		GET /:id
 router.get('/:id', (req,res)=>{
     const {id} =req.params
   
@@ -30,6 +34,8 @@ router.get('/:id', (req,res)=>{
     .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
  })
 
+ // @desc		get a job's power statements
+// @route		GET /:id/powers
  router.get('/:id/powers', (req, res) => {
    const { id } = req.params
 
@@ -44,12 +50,16 @@ router.get('/:id', (req,res)=>{
     .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
 })
 
+// @desc		add new job
+// @route		POST /
  router.post('/', (req, res) => {
     Job.createJobs(req.body)
     .then(job => res.status(201).json(job))
     .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
 }) 
 
+// @desc		add new power statement to job
+// @route		POST /:id/power
 router.post('/:id/power', (req,res)=>{ 
     const powerData = {...req.body, job_id: req.params.id}
     const {id} = req.params
@@ -72,6 +82,8 @@ router.post('/:id/power', (req,res)=>{
 
  })
 
+// @desc		edit job
+// @route		PUT /:id 
 router.put('/:id', (req, res) => {
     const { id } = req.params;
     const changes = req.body;
@@ -91,7 +103,9 @@ router.put('/:id', (req, res) => {
         res.status(500).json({ message: 'Failed to update job', error: err.message, extra: err.stack });
       });
   });
-  
+ 
+// @desc		delete a job
+// @route		DELETE /  
   router.delete('/:id', (req, res) => {
     const { id } = req.params;
   
