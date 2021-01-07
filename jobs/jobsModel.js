@@ -20,10 +20,12 @@ module.exports = {
         .where({id})
         .first()
     }
-    function findPowers(){
-        return db('powerstate as p')
-        .join('jobs as j', 'j.id', 'p.job_id')
-        .select('j.job_title', 'j.employer', 'p.action', 'p.result', 'p.quant')
+    function findPowers(id){
+        return db('jobs as j')
+        .join('powerstate as p', 'j.job_id', 'p.job_id')
+        .select('j.job_title', 'j.employer', 'p.action', 'p.result', 'p.quant', 'p.power_id')
+        .where({'j.job_id': id})
+        .orderBy('p.power_id')
     }
 
     async function createJobs(job){

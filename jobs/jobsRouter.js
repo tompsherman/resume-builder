@@ -16,10 +16,16 @@ router.get('/', (req,res)=>{
     .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
  })
 
- router.get('/powers', (req, res) => {
-    Job.findPowers()
+ router.get('/:id/powers', (req, res) => {
+   const { id } = req.params
+
+   Job.findPowers(id)
     .then(powers => {
-        res.status(202).json(powers)
+      if (powers.length) {
+        res.json(powers)
+      } else {
+        res.status(404).json({ message: 'can not find power statements for given job'})
+      }
     })
     .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
 })

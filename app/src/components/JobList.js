@@ -5,6 +5,7 @@ import JobCard from './JobCard'
 
 const JobList = () => {
     const [resume, setResume] = useState([])
+    const [powerState, setPowerState] = useState([])
     const [doggle, setDoggle] = useState(false)
 
     const seeInfo = () => {
@@ -29,7 +30,7 @@ const JobList = () => {
                     </>
                 )
             }
-            <PowerStates />
+            {/* <PowerStates /> */}
         </div>
     )
 }

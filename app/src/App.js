@@ -10,12 +10,12 @@ const App = () => {
   return (
     <div className="App">
       <h1>Build your resume:</h1> 
-      {/* <Route exact path='/'>
+      <Route exact path='/'>
           <JobList />
-      </Route>   */}
-      {/* <Route exact path='/add'>
+      </Route>  
+      <Route exact path='/add'>
           <JobForm />
-      </Route> */}
+      </Route>
     </div>
   );
 };
