@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import ActionStatementForm from './ActionStatementForm'
+import UpdateJobForm from './UpdateJobForm'
 
 const JobCard = (props) => {
     const [snoggle, setSnoggle] = useState(false)
@@ -34,7 +35,7 @@ const JobCard = (props) => {
     }
 
 
-    const showAct = () => {
+    const showEdit = () => {
         setSnoggle(!snoggle)
     }
 
@@ -55,10 +56,10 @@ const JobCard = (props) => {
                     
                 )
             } */}
-
-            <button>edit job info</button>
-            {snoggle ? <ActionStatementForm /> : null}
-            <button onClick={showAct}>add power statement</button>
+            { snoggle ? <UpdateJobForm job={job}/> : null }
+            <button onClick={showEdit}>edit job info</button>
+            {/* {snoggle ? <ActionStatementForm /> : null} */}
+            <button>add power statement</button>
             <button>delete</button>
         </div>
     )

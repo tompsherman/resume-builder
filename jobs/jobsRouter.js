@@ -16,6 +16,20 @@ router.get('/', (req,res)=>{
     .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
  })
 
+router.get('/:id', (req,res)=>{
+    const {id} =req.params
+  
+    Job.findJobsById(id)
+    .then(job => {
+      if(job){
+        res.status(200).json(job)
+      } else {
+        res.status(404).json({ message: 'cannot find job with given ID'})
+      }
+    })
+    .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
+ })
+
  router.get('/:id/powers', (req, res) => {
    const { id } = req.params
 
