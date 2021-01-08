@@ -10,9 +10,10 @@ const initialValues = {
     img_url: ""
 }
 
-const UpdateJobForm = () => {
+const UpdateJobForm = (props) => {
     const history = useHistory()
     const {id} = useParams()
+    const { roggle, setRoggle } = props
     console.log("job update props", id)
     const [jobby, setJobby] = useState(initialValues)
     
@@ -28,18 +29,21 @@ const UpdateJobForm = () => {
 
     const submitHandler = (event) => {
         axios.put(`http://localhost:8888/api/resume/jobs/${id}`, jobby)
-        .then(response => console.log("response on Submit", response), history.push('/'))
+        .then(response => console.log("response on Submit", response), setRoggle(!roggle), history.push('/'))
         .catch(error => console.log(error))
     }
 
     const deleteJob = (event) => {
         axios.delete(`http://localhost:8888/api/resume/jobs/${id}`)
-        .then(response => console.log("delete response", response))
+        .then(response => console.log("delete response", response), setRoggle(!roggle))
         .catch(error => console.log(error))
 
         history.push(`/`)
     }
 
+    const powerPlace = (event) =>{
+        history.push(`/job/${id}/power-statements`)
+    }
     return (
         <div>
             <h4>update job form</h4>
@@ -88,7 +92,7 @@ const UpdateJobForm = () => {
             </form>
             <button onClick={deleteJob}>delete this job</button>
             <br></br>
-            <button>edit power statements</button>
+            <button onClick={powerPlace}>edit power statements</button>
         </div>
     )
 }

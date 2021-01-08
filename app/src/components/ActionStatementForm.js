@@ -1,16 +1,23 @@
 import React, {useState} from 'react'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
 const initialValues = {
     action: "",
     result: "",
-    quant: ""
+    quant: "",
+    job_id: null
 }
 
 const url = "this is a url"
 
 const ActionStatementForm = () => {
+    const {id} = useParams()
+    initialValues.job_id = id
+
     const [powerState, setPowerState] = useState(initialValues)
+
+    console.log("job id ", initialValues)
 
     const changeHandler = (event) => {
         setPowerState({...powerState, [event.target.name]: event.target.value})

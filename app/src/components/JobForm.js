@@ -12,8 +12,8 @@ const initialValues = {
 
 const url = "this is a url"
 
-const JobForm = () => {
-
+const JobForm = (props) => {
+    const { roggle, setRoggle } = props
     const [job, setJob] = useState(initialValues)
     const [floggle, setFloggle] = useState(false)
 
@@ -30,7 +30,7 @@ const JobForm = () => {
         event.preventDefault()
         axios
             .post("http://localhost:8888/api/resume/jobs", job)
-            .then(response => console.log("this is the job:", response))
+            .then(response => console.log("this is the job:", response), setRoggle(!roggle))
             .catch(error => console.log(error))
         setJob(initialValues)
     }
