@@ -11,6 +11,7 @@ const initialValues = {
 }
 
 const UpdateJobForm = () => {
+    const history = useHistory()
     const {id} = useParams()
     console.log("job update props", id)
     const [jobby, setJobby] = useState(initialValues)
@@ -27,9 +28,18 @@ const UpdateJobForm = () => {
 
     const submitHandler = (event) => {
         axios.put(`http://localhost:8888/api/resume/jobs/${id}`, jobby)
-        .then(response => console.log("response on Submit", response))
+        .then(response => console.log("response on Submit", response), history.push('/'))
         .catch(error => console.log(error))
     }
+
+    const deleteJob = (event) => {
+        axios.delete(`http://localhost:8888/api/resume/jobs/${id}`)
+        .then(response => console.log("delete response", response))
+        .catch(error => console.log(error))
+
+        history.push(`/`)
+    }
+
     return (
         <div>
             <h4>update job form</h4>
@@ -74,8 +84,11 @@ const UpdateJobForm = () => {
                     placeholder='employer image'
                 />
                 <br></br>
-                <button>submit</button>
+                <button>update</button>
             </form>
+            <button onClick={deleteJob}>delete this job</button>
+            <br></br>
+            <button>edit power statements</button>
         </div>
     )
 }

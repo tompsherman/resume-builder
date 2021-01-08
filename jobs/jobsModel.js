@@ -53,13 +53,13 @@ module.exports = {
             return Promise.resolve(null)
         }
     }
-    async function removeJobs(id){
-        const job = await db('jobs').where({id}).first()
+    async function removeJobs(job_id){
+        const job = await db('jobs').where({job_id}).first()
         if (!job){
             return Promise.resolve(null)
         } else {
             await db('jobs')
-            .where({id})
+            .where({job_id})
             .del()
             return Promise.resolve(job)
         }
