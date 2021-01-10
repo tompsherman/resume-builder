@@ -3,6 +3,14 @@ import axios from 'axios'
 import { useHistory, useParams } from 'react-router-dom'
 import ActionStatementForm from './ActionStatementForm'
 
+const initialValues = {
+    power_id: "",
+    job_id: "",
+    action: "",
+    result: "",
+    quant: ""
+}
+
 const PowerStates = () => {
     const history = useHistory()
     const { id } = useParams()
@@ -15,21 +23,67 @@ const PowerStates = () => {
         .catch(error => console.log(error))
     }, [])
 
+    const changeHandler = (event) => {
+        setPowerStates({...powerStates, [event.target.name]: event.target.value})
+    }
+
+    const submitHandler = (event) => {
+        axios.put(`http://localhost:8888/api/resume/power/${powerStates.power_id}/`)
+        .then(response => console.log("response on submit", response))
+        .catch(error => console.log(error))
+    }
+
+    const deletePower = (event) => {
+        console.log("delete power statement here")
+    }
     console.log("power statements:", powerStates)
+
     return (
         <div>
             <ActionStatementForm />
+            
             {
             powerStates.map(power => 
-                    <div className="joblist" key={power.power_id}>
-                        <h5 className="jobitem">{power.power_id}</h5>
-                        <h5 className="jobitem">{power.action}</h5>
-                        <h5 className="jobitem">{power.result}</h5>
-                        <h5 className="jobitem">{power.quant}</h5>
-                        <h6 className="jobitem">{power.job_title}</h6>
-                        <h6 className="jobitem">{power.employer}</h6>
-                        <button>edit this</button>
-                    </div>
+                <form onSubmit={submitHandler}>
+                power id: <input 
+                    name='power_id'
+                    type='text'
+                    value={power.power_id}
+                    placeholder="power id"
+                />
+                job id: <input 
+                    name='job_id'
+                    type='text'
+                    value={power.job_id}
+                    placeholder="job id"
+                />
+                <br></br>
+                action: <input
+                    name='action'
+                    type='text'
+                    value={power.action}
+                    onChange={changeHandler}
+                    placeholder='enter action verb (required)'
+                />
+                <br></br>
+                result: <input
+                    name='result'
+                    type='text'
+                    value={power.result}
+                    onChange={changeHandler}
+                    placeholder='enter achievement or result (required)'
+                />
+                <br></br>
+                quantification: <input
+                    name='quant'
+                    type='text'
+                    value={power.quant}
+                    onChange={changeHandler}
+                    placeholder='quantify achievement/result'
+                />
+                <br></br>
+                <button>submit</button>
+            </form>
                 )
             }
         </div>

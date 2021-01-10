@@ -9,10 +9,18 @@ import UpdateJobForm from './components/UpdateJobForm'
 import UpdatePowerStates from './components/UpdatePowerStates'
 
 const App = () => {
+  const history = useHistory()
   const [roggle, setRoggle] = useState(false)
+
+  const goHome = (event) => {
+    history.push('/')
+  }
+
   return (
     <div className="App">
-      <h1>Build your resume:</h1> 
+      <div onClick={goHome}>
+        <h1>Build your resume:</h1>
+      </div> 
       <JobForm roggle={roggle} setRoggle={setRoggle}/>
 
       <Route exact path='/'>

@@ -6,15 +6,19 @@ import PowerStates from './PowerStates'
 
 
 const UpdatePowerStates = () => {
-    // const { id } = useParams()
+    const { id } = useParams()
     
-    // const [powStat, setPowStat] = useState()
+    const [powStat, setPowStat] = useState()
 
-    // useEffect(()=>{
-    //     axios.get(`http://localhost:8888/api/resume/jobs/${id}/powers`)
-    //     .then()
-    //     .catch(error => console.log(error))
-    // })
+    useEffect(()=>{
+        axios.get(`http://localhost:8888/api/resume/jobs/${id}/powers`)
+        .then(response => setPowStat(response.data))
+        .catch(error => console.log(error))
+    }, [])
+
+    console.log("powstat", powStat)
+
+    // let arr = powStat.map(power => power.power_id)
 
     return (
         <div>
