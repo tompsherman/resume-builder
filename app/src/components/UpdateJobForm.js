@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { Route, useHistory, useParams } from 'react-router-dom'
+import UpdatePowerStates from './UpdatePowerStates'
+
 
 const initialValues = {
     job_title: "",
@@ -93,6 +95,11 @@ const UpdateJobForm = (props) => {
             <button onClick={deleteJob}>delete this job</button>
             <br></br>
             <button onClick={powerPlace}>edit power statements</button>
+
+            {/* <Route exact path='/job/:id/power-statements'>
+                <UpdatePowerStates />
+            </Route> */}
+            
         </div>
     )
 }

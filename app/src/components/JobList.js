@@ -3,6 +3,7 @@ import axios from 'axios'
 import PowerStates from './PowerStates'
 import JobCard from './JobCard'
 import { useHistory, useParams } from 'react-router-dom'
+import Drag from './Drag'
 
 const JobList = (props) => {
     const { roggle, setRoggle } = props
@@ -29,7 +30,12 @@ const JobList = (props) => {
             <h4>list of past jobs:</h4>
             {
                 resume.map(job => 
-                     <JobCard job={job} key={job.id} doggle={doggle}/>
+                <>
+                    <Drag>
+                        <JobCard job={job} key={job.id} doggle={doggle}/>
+                    </Drag>
+
+                </>
             )}
             {/* <PowerStates /> */}
         </div>

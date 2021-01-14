@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { Route, useHistory } from 'react-router-dom'
 
 import './App.css'
+import Drag from './components/Drag'
+import DropList from './components/DropList'
+import DropTarget from './components/DropTarget'
 import JobCard from './components/JobCard'
 import JobForm from './components/JobForm'
 import JobList from './components/JobList'
@@ -15,7 +18,7 @@ const App = () => {
   const goHome = (event) => {
     history.push('/')
   }
-
+  let itemDropped = "Hello, Gubnah!"
   return (
     <div className="App">
       <div onClick={goHome}>
@@ -24,7 +27,14 @@ const App = () => {
       <JobForm roggle={roggle} setRoggle={setRoggle}/>
 
       <Route exact path='/'>
-          <JobList roggle={roggle} setRoggle={setRoggle}/>
+          <div className="drag-holder">
+            <div className="inactive">
+                <JobList roggle={roggle} setRoggle={setRoggle}/>
+            </div>
+            <div className="droppable">
+              <DropList />
+            </div>
+          </div>
       </Route>  
       <Route exact path='/add'>
           <JobForm />

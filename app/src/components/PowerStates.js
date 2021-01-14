@@ -42,7 +42,7 @@ const PowerStates = () => {
         <div>
             <ActionStatementForm />
             
-            {
+            {/* {
             powerStates.map(power => 
                 <form onSubmit={submitHandler}>
                 power id: <input 
@@ -54,7 +54,7 @@ const PowerStates = () => {
                 job id: <input 
                     name='job_id'
                     type='text'
-                    value={power.job_id}
+                    value={id}
                     placeholder="job id"
                 />
                 <br></br>
@@ -85,7 +85,16 @@ const PowerStates = () => {
                 <button>submit</button>
             </form>
                 )
+            } */}
+
+            {
+                powerStates.map(power => 
+                    <div>
+                        
+                    </div>
+                )
             }
+
         </div>
     )
 }
