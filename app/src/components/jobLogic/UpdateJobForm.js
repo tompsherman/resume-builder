@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Route, useHistory, useParams } from 'react-router-dom'
-import UpdatePowerStates from './UpdatePowerStates'
-
+import PowerList from '../powerLogic/PowerList'
+import UpdatePowerStates from '../powerLogic/UpdatePowerStates'
 
 const initialValues = {
     job_title: "",
@@ -15,8 +15,8 @@ const initialValues = {
 const UpdateJobForm = (props) => {
     const history = useHistory()
     const {id} = useParams()
-    const { roggle, setRoggle } = props
-    console.log("job update props", id)
+    const { roggle, setRoggle, job } = props
+    console.log("job update props", id, job)
     const [jobby, setJobby] = useState(initialValues)
     
     useEffect(()=>{
@@ -94,12 +94,8 @@ const UpdateJobForm = (props) => {
             </form>
             <button onClick={deleteJob}>delete this job</button>
             <br></br>
-            <button onClick={powerPlace}>edit power statements</button>
-
-            {/* <Route exact path='/job/:id/power-statements'>
-                <UpdatePowerStates />
-            </Route> */}
-            
+            <button onClick={powerPlace}>edit power statements</button>  
+      
         </div>
     )
 }
