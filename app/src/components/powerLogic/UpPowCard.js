@@ -1,5 +1,6 @@
 import React from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 const UpPowCard = (props) => {
     const { job, power } = props
@@ -26,7 +27,10 @@ const UpPowCard = (props) => {
     }
 
     const delPow = (event) => {
-        
+        axios.delete(`http://localhost:8888/api/resume/power/${power.power_id}`)
+        .then(response => console.log("delete response", response))
+        .catch(error => console.log(error))
+
         history.push(`/job/${job}/power-statements`)
     }
     
