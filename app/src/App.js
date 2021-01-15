@@ -1,24 +1,37 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Route, useHistory } from 'react-router-dom'
 
 import './App.css'
-import Drag from './components/Drag'
-import DropList from './components/DropList'
-import DropTarget from './components/DropTarget'
-import JobCard from './components/JobCard'
-import JobForm from './components/JobForm'
-import JobList from './components/JobList'
-import UpdateJobForm from './components/UpdateJobForm'
-import UpdatePowerStates from './components/UpdatePowerStates'
+import DropList from './components/dNdLogic/DropList'
+import JobForm from './components/jobLogic/JobForm'
+import JobList from './components/jobLogic/JobList'
+import UpdateJobForm from './components/jobLogic/UpdateJobForm'
+import PowerList from './components/powerLogic/PowerList'
+import UpdatePow from './components/powerLogic/UpdatePow'
+import UpPowList from './components/powerLogic/UpPowList'
 
 const App = () => {
   const history = useHistory()
   const [roggle, setRoggle] = useState(false)
+  const [jobs, setJobs] = useState([])
+  const [powers, setPowers] = useState([])
+
+  useEffect(()=>{
+    axios.get('http://localhost:8888/api/resume/jobs')
+    .then(response => setJobs(response.data))
+    .catch(error => console.log(error))
+  }, [])
+
+  useEffect(()=>{
+    axios.get('http://localhost:8888/api/resume/power')
+    .then(response => setPowers(response.data))
+    .catch(error => console.log(error))
+  }, [])
 
   const goHome = (event) => {
     history.push('/')
   }
-  let itemDropped = "Hello, Gubnah!"
   return (
     <div className="App">
       <div onClick={goHome}>
@@ -40,12 +53,14 @@ const App = () => {
           <JobForm />
       </Route>
       <Route exact path='/edit-job/:id'>
-          <UpdateJobForm roggle={roggle} setRoggle={setRoggle}/>
+          <UpdateJobForm job={jobs} roggle={roggle} setRoggle={setRoggle}/>
       </Route>
       <Route exact path='/job/:id/power-statements'>
-        <UpdatePowerStates />
+          <UpPowList />
       </Route>
-
+      <Route exact path='/edit-job/:id/edit-power/:powID'>
+        <UpdatePow />
+      </Route>    
     </div>
   );
 };
