@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Route, useHistory, useParams } from 'react-router-dom'
 import PowerList from '../powerLogic/PowerList'
-import UpdatePowerStates from '../powerLogic/UpdatePowerStates'
 
 const initialValues = {
     job_title: "",
