@@ -9,11 +9,26 @@ const currentTime = new Date().toDateString()
 router.get('/test', (req, res) => {
     res.status(202).json({message: 'the server is running at ' + currentTime})
 })
+
 router.get('/', (req,res)=>{ 
     Power.findPower()
     .then(power => res.status(200).json(power))
     .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
  })
+
+router.get('/:id', (req,res)=>{
+  const {id} =req.params
+
+  Power.findPowerById(id)
+  .then(power => {
+    if(power){
+      res.status(200).json(power)
+    } else {
+      res.status(404).json({ message: 'cannot find power with given ID'})
+    }
+  })
+  .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
+}) 
 
  router.post('/', (req, res) => {
     Power.createPower(req.body)
